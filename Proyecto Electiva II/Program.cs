@@ -1,21 +1,17 @@
+using ActividadEntregable1.Interface;
+using ActividadEntregable1.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Controladores
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+// Inyección de dependencias
+builder.Services.AddScoped<ITaskServices, TaskServices>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
+// Middleware
 app.UseAuthorization();
 
 app.MapControllers();
